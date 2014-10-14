@@ -33,7 +33,8 @@
   "/webcert/js/services/fragaSvarCommonService.js",
   "/webcert/js/services/ManageCertView.js",
   "/webcert/js/services/statService.js",
-  "/webcert/js/services/User.js"
+  "/webcert/js/services/User.js",
+  "webcert/js/module.js"
   ],
   "keywords": [
     "webcert",

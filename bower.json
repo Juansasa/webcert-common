@@ -9,6 +9,8 @@
   "/css/inera-certificate.css",
   "/webcert/css/inera-webcert.css",
   "/webcert/css/print.css",
+  "/minaintyg/js/module.js",
+  "webcert/js/module.js"
   "/minaintyg/js/messages.js",
   "/minaintyg/js/controllers/SendCertWizardCtrl.js",
   "/minaintyg/js/filters/BoolToTextFilter.js",
@@ -33,9 +35,7 @@
   "/webcert/js/directives/wcPrintHeader.js",
   "/webcert/js/directives/wcSpinner.js",
   "/webcert/js/directives/wcDatePickerField.js",
-  "/webcert/js/directives/wcPersonNumber.js",
-  "/minaintyg/js/module.js",
-  "webcert/js/module.js"
+  "/webcert/js/directives/wcPersonNumber.js"
   ],
   "keywords": [
     "webcert",

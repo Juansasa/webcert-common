@@ -1,0 +1,26 @@
+{
+  "name": "webcert-common",
+  "version": "1.0.0",
+  "authors": [
+    "Quang vu <nickiewooster@gmail.com>"
+  ],
+  "description": "common dependencies for webcert",
+  "main": [
+  "inera-certificate.css",
+  "/minaintyg/messages.js",
+  "/minaintyg/js/certificateService.js",
+  "/minaintyg/js/dialogService.js"
+  ],
+  "keywords": [
+    "webcert",
+    "common"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

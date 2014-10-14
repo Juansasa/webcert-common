@@ -1,6 +1,6 @@
 {
   "name": "webcert-common",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "authors": [
     "Quang vu <nickiewooster@gmail.com>"
   ],
@@ -34,7 +34,6 @@
   "/webcert/js/services/ManageCertView.js",
   "/webcert/js/services/statService.js",
   "/webcert/js/services/User.js"
-
   ],
   "keywords": [
     "webcert",

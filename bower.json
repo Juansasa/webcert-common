@@ -10,7 +10,7 @@
   "/webcert/css/inera-webcert.css",
   "/webcert/css/print.css",
   "/minaintyg/js/module.js",
-  "webcert/js/module.js"
+  "webcert/js/module.js",
   "/minaintyg/js/messages.js",
   "/minaintyg/js/controllers/SendCertWizardCtrl.js",
   "/minaintyg/js/filters/BoolToTextFilter.js",

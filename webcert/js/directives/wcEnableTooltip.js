@@ -17,6 +17,6 @@ angular.module('common').directive('wcEnableTooltip',
                         return messageService.getProperty(key);
                     };
                 },
-                templateUrl: '/web/webjars/common/webcert/js/directives/wcEnableTooltip.html'
+                template: '<span class=\"glyphicon glyphicon-question-sign\" tooltip-trigger=\"mouseenter\" tooltip-html-unsafe=\"{{getMessage(fieldHelpText)}}\" tooltip-placement=\"right\"></span>\n'
             };
         }]);

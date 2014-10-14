@@ -11,6 +11,6 @@ angular.module('common').directive('wcSpinner',
                 showSpinner: '=',
                 showContent: '='
             },
-            templateUrl: '/web/webjars/common/webcert/js/directives/wcSpinner.html'
+            template: '<div> <div ng-show=\"showSpinner\" class=\"wc-spinner\"> <img aria-labelledby=\"loading-message\" src=\"/img/ajax-loader.gif\" /> <p id=\"loading-message\"> <strong><span message key=\"{{ label }}\"></span></strong> </p> </div> <div ng-show=\"showContent\"> <div ng-transclude></div> </div> </div> '
         };
     });

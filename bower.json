@@ -18,6 +18,8 @@
   "/minaintyg/js/services/http403ResponseInterceptor.js",
   "/minaintyg/js/services/httpRequestInterceptorCacheBuster.js",
   "/minaintyg/js/services/messageService.js",
+  "/minaintyg/js/messages.js",
+  "/minaintyg/js/module.js",
   "/webcert/js/directives/wcEnableTooltip.js",
   "/webcert/js/directives/wcEyeDecimal.js",
   "/webcert/js/directives/wcField.js",

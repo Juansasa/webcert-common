@@ -15,6 +15,6 @@ angular.module('common').directive('wcPrintHeader',
                     $scope.today = new Date();
                     $scope.user = User;
                 },
-                template: '<div class=\"print-show\"> <img class=\"print-logo\" src=\"/img/webcert_black.png\" /> <div class=\"row\"> <div class=\"col-md-6 print-heading-column-left\"> <h1><span message key=\"{{titleId}}\"></span></h1> <p>Intygsid: {{intygsId}}</p> <h2><span message key=\"{{printMessageId}}\"></span></h2> </div> <div class=\"col-md-6 print-heading-column-right\"> <div>{{user.userContext.valdVardgivare.namn}} - {{user.userContext.valdVardenhet.namn}}</div> <div>Utskrivet: {{today | date:\"shortDate\"}}</div> </div> </div> </div> '
+                templateUrl: '/web/webjars/common/webcert/js/directives/wcPrintHeader.html'
             };
         }]);

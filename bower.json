@@ -11,9 +11,10 @@
   "/minaintyg/js/module.js",
   "/minaintyg/js/filters/BoolToTextFilter.js",
   "/minaintyg/js/services/certificateService.js",
-  "minaintyg/js/services/dialogService.js",
-  "minaintyg/js/services/http403ResponseInterceptor.js",
-  "minaintyg/js/services/httpRequestInterceptorCacheBuster.js",
+  "/minaintyg/js/services/dialogService.js",
+  "/minaintyg/js/services/http403ResponseInterceptor.js",
+  "/minaintyg/js/services/httpRequestInterceptorCacheBuster.js",
+  "/minaintyg/js/services/listCertService.js",
   "/minaintyg/js/services/messageService.js",
   "/minaintyg/js/directives/message.js",
   "minaintyg/js/controllers/SendCertWizardCtrl.js"

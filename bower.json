@@ -7,7 +7,9 @@
   "description": "common dependencies for webcert",
   "main": [
   "/css/inera-certificate.css",
-  "/webcert/css/inera-webcert.css",
+
+  // Uncomment when developing webcert module
+/*  "/webcert/css/inera-webcert.css",
   "/webcert/css/print.css",
   "/webcert/js/module.js",
   "/webcert/js/messages.js",
@@ -33,7 +35,17 @@
   "/webcert/js/directives/wcPrintHeader.js",
   "/webcert/js/directives/wcSpinner.js",
   "/webcert/js/directives/wcDatePickerField.js",
-  "/webcert/js/directives/wcPersonNumber.js"
+  "/webcert/js/directives/wcPersonNumber.js"*/
+  "/minaintyg/js/messages.js",
+  "/minaintyg/js/module.js",
+  "/minaintyg/js/filters/BoolToTextFilter.js",
+  "/minaintyg/js/services/certificateService.js",
+  "minaintyg/js/services/dialogService.js",
+  "minaintyg/js/services/http403ResponseInterceptor.js",
+  "minaintyg/js/services/httpRequestInterceptorCacheBuster.js",
+  "/minaintyg/js/services/messageService.js",
+  "/minaintyg/js/directives/messages.js",
+  "minaintyg/js/controllers/SendCertWizardCtrl.js"
   ],
   "keywords": [
     "webcert",

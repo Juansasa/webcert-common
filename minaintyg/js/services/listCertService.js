@@ -1,4 +1,4 @@
-angular.module('minaintyg').factory('minaintyg.listCertService',
+angular.module('common').factory('minaintyg.listCertService',
     function($http, $log) {
         'use strict';
 

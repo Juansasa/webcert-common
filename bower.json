@@ -18,6 +18,8 @@
   "/minaintyg/js/services/httpRequestInterceptorCacheBuster.js",
   "/minaintyg/js/services/listCertService.js",
   "/minaintyg/js/services/messageService.js",
+  "/minaintyg/js/services/consentService.js",
+  "/minaintyg/js/services/sendCertService.js",
   "/minaintyg/js/directives/message.js",
   "/minaintyg/js/directives/miField.js",
   "/minaintyg/js/directives/miHeader.js",

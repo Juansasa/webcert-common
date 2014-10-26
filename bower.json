@@ -7,6 +7,8 @@
   "description": "common dependencies for webcert",
   "main": [
   "/css/inera-certificate.css",
+  "/minaintyg/css/inera-certificate-responsive.css",
+  "/minaintyg/css/inera.css",
   "/minaintyg/js/messages.js",
   "/minaintyg/js/module.js",
   "/minaintyg/js/filters/BoolToTextFilter.js",

@@ -19,6 +19,12 @@
   "/minaintyg/js/services/listCertService.js",
   "/minaintyg/js/services/messageService.js",
   "/minaintyg/js/directives/message.js",
+  "/minaintyg/js/directives/miField.js",
+  "/minaintyg/js/directives/miHeader.js",
+  "/minaintyg/js/directives/miMainNavigation.js",
+  "/minaintyg/js/directives/miSpinner.js",
+  "/minaintyg/js/directives/mvkTopBar.js",
+  "/minaintyg/js/directives/ngFocus.js",
   "minaintyg/js/controllers/SendCertWizardCtrl.js"
   ],
   "keywords": [

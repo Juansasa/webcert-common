@@ -22,6 +22,8 @@
   "/webcert/js/services/ManageCertView.js",
   "/webcert/js/services/statService.js",
   "/webcert/js/services/User.js",
+  "/webcert/js/services/CreateCertificateDraft.js",
+  "/webcert/js/services/ManageCertificate.js",
   "/webcert/js/directives/message.js",
   "/webcert/js/directives/wcEnableTooltip.js",
   "/webcert/js/directives/wcEyeDecimal.js",

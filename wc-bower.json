@@ -18,6 +18,7 @@
   "/webcert/js/services/httpRequestInterceptorCacheBuster.js",
   "/webcert/js/services/messageService.js",
   "/webcert/js/services/CertificateService.js",
+  "/webcert/js/services/featureService.js",
   "/webcert/js/services/fragaSvarCommonService.js",
   "/webcert/js/services/ManageCertView.js",
   "/webcert/js/services/statService.js",

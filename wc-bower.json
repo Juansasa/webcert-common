@@ -42,7 +42,7 @@
   "/webcert/js/directives/wcMaxLength.js",
   "/webcert/js/directives/wcPersonNumber.js",
   "/webcert/js/directives/wcPrintHeader.js",
-  "/webcert/js/directives/wcSpinner.js",
+  "/webcert/js/directives/wcSpinner.js"
   ],
   "keywords": [
     "webcert",

@@ -10,9 +10,9 @@ angular.module('common').factory('common.fragaSvarCommonService',
         /*
          * Toggle vidarebefordrad state of a fragasvar entity with given id
          */
-        function _setVidareBefordradState(id, isVidareBefordrad, callback) {
+        function _setVidareBefordradState(fragaSvarId, intygsTyp, isVidareBefordrad, callback) {
             $log.debug('_setVidareBefordradState');
-            var restPath = '/moduleapi/fragasvar/' + id + '/setDispatchState';
+            var restPath = '/moduleapi/fragasvar/' + intygsTyp + '/' + fragaSvarId + '/hanterad';
             $http.put(restPath, isVidareBefordrad.toString()).success(function(data) {
                 $log.debug('_setVidareBefordradState data:' + data);
                 callback(data);
@@ -26,7 +26,8 @@ angular.module('common').factory('common.fragaSvarCommonService',
         function _buildMailToLink(qa) {
             var baseURL = $window.location.protocol + '//' + $window.location.hostname +
                 ($window.location.port ? ':' + $window.location.port : '');
-            var url = baseURL + '/m/fk7263/webcert/intyg/' + qa.intygsReferens.intygsId + '#/view';
+            var url = baseURL + '/webcert/web/user/certificate/' + qa.intygsReferens.intygsId + '/questions';
+
             var recipient = '';
             var subject = 'En fraga-svar ska besvaras i Webcert.';
             if (qa.vardperson.enhetsnamn !== undefined) {

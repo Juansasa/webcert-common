@@ -16,9 +16,9 @@ angular.module('common').factory('common.CertificateService',
         /*
          * Load certificate details from the server.
          */
-        function _getCertificate(id, onSuccess, onError) {
-            $log.debug('_getCertificate id:' + id);
-            var restPath = '/moduleapi/intyg/signed/' + id;
+        function _getCertificate(intygsId, intygsTyp, onSuccess, onError) {
+            $log.debug('_getCertificate id:' + intygsId + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/intyg/' + intygsTyp + '/' + intygsId;
             $http.get(restPath).success(function(data) {
                 $log.debug('_getCertificate data:' + data);
                 onSuccess(data);
@@ -31,9 +31,9 @@ angular.module('common').factory('common.CertificateService',
         /**
          * Get a certificate draft with the specified id from the server.
          */
-        function _getDraft(id, onSuccess, onError) {
-            $log.debug('_getDraft id: ' + id);
-            var restPath = '/moduleapi/intyg/draft/' + id;
+        function _getDraft(intygsId, intygsTyp, onSuccess, onError) {
+            $log.debug('_getDraft intygsId: ' + intygsId + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/utkast/' + intygsTyp + '/' + intygsId;
             $http.get(restPath).
                 success(function(data) {
                     $log.debug('_getDraft data: ' + data);
@@ -48,9 +48,9 @@ angular.module('common').factory('common.CertificateService',
         /**
          * Saves a certificate draft to the server.
          */
-        function _saveDraft(id, cert, onSuccess, onError) {
-            $log.debug('_saveDraft id: ' + id);
-            var restPath = '/moduleapi/intyg/draft/' + id;
+        function _saveDraft(intygsId, intygsTyp, cert, onSuccess, onError) {
+            $log.debug('_saveDraft id: ' + intygsId + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/utkast/' + intygsTyp + '/' + intygsId;
             $http.put(restPath, cert).
                 success(function(data) {
                     $log.debug('_saveDraft data: ' + data);
@@ -65,9 +65,9 @@ angular.module('common').factory('common.CertificateService',
         /**
          * Discards a certificate draft and removes it from the server.
          */
-        function _discardDraft(id, onSuccess, onError) {
-            $log.debug('_discardDraft id: ' + id);
-            var restPath = '/moduleapi/intyg/draft/' + id;
+        function _discardDraft(intygsId, intygsTyp, onSuccess, onError) {
+            $log.debug('_discardDraft id: ' + intygsId + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/utkast/' + intygsTyp + '/' + intygsId;
             $http['delete'](restPath).
                 success(function(data) {
                     $log.debug('_discardDraft data: ' + data);
@@ -79,9 +79,9 @@ angular.module('common').factory('common.CertificateService',
                 });
         }
 
-        function _getSigneringshash(intygId, onSuccess, onError) {
-            $log.debug('_getSigneringshash, intygId: ' + intygId);
-            var restPath = '/moduleapi/intyg/signeringshash/' + intygId;
+        function _getSigneringshash(intygsId, intygsTyp, onSuccess, onError) {
+            $log.debug('_getSigneringshash, intygsId: ' + intygsId + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/utkast/' + intygsTyp + '/' + intygsId + '/signeringshash';
             $http.post(restPath).
                 success(function(data) {
                     onSuccess(data);
@@ -91,9 +91,9 @@ angular.module('common').factory('common.CertificateService',
                 });
         }
 
-        function _getSigneringsstatus(ticketId, onSuccess, onError) {
-            $log.debug('_getSigneringsstatus, ticketId: ' + ticketId);
-            var restPath = '/moduleapi/intyg/signeringsstatus/' + ticketId;
+        function _getSigneringsstatus(ticketId, intygsTyp, onSuccess, onError) {
+            $log.debug('_getSigneringsstatus, ticketId: ' + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/utkast/' + intygsTyp + '/' + ticketId + '/signeringsstatus';
             $http.get(restPath).
                 success(function(data) {
                     onSuccess(data);
@@ -103,9 +103,9 @@ angular.module('common').factory('common.CertificateService',
                 });
         }
 
-        function _signeraUtkast(intygId, onSuccess, onError) {
-            $log.debug('_signeraUtkast, intygId:' + intygId);
-            var restPath = '/moduleapi/intyg/signera/server/' + intygId;
+        function _signeraUtkast(intygsId, intygsTyp, onSuccess, onError) {
+            $log.debug('_signeraUtkast, intygsId:' + intygsId + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/utkast/' + intygsTyp + '/' + intygsId + '/signeraserver';
             $http.post(restPath).
                 success(function(data) {
                     onSuccess(data);
@@ -115,9 +115,9 @@ angular.module('common').factory('common.CertificateService',
                 });
         }
 
-        function _signeraUtkastWithSignatur(ticketId, signatur, onSuccess, onError) {
-            $log.debug('_signeraUtkastWithSignatur, ticketId: ' + ticketId);
-            var restPath = '/moduleapi/intyg/signera/klient/' + ticketId;
+        function _signeraUtkastWithSignatur(ticketId, intygsTyp, signatur, onSuccess, onError) {
+            $log.debug('_signeraUtkastWithSignatur, ticketId: ' + ticketId + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/utkast/' + intygsTyp + '/' + ticketId + '/signeraklient';
             $http.post(restPath).
                 success(function() {
                     onSuccess();
@@ -127,9 +127,9 @@ angular.module('common').factory('common.CertificateService',
                 });
         }
 
-        function _sendSigneratIntyg(cert, recipientId, patientConsent, onSuccess, onError) {
-            $log.debug('_sendSigneratIntyg: ' + cert.id);
-            var restPath = '/moduleapi/intyg/signed/' + cert.id + '/send';
+        function _sendSigneratIntyg(intygsId, intygsTyp, recipientId, patientConsent, onSuccess, onError) {
+            $log.debug('_sendSigneratIntyg: ' + intygsId);
+            var restPath = '/moduleapi/intyg/' + intygsTyp + '/' + intygsId + '/skicka';
             $http.post(restPath, {'recipient': recipientId, 'patientConsent': patientConsent}).
                 success(function(data) {
                     onSuccess(data);
@@ -139,9 +139,9 @@ angular.module('common').factory('common.CertificateService',
                 });
         }
 
-        function _revokeSigneratIntyg(intygId, onSuccess, onError) {
-            $log.debug('_revokeSigneratIntyg: ' + intygId);
-            var restPath = '/moduleapi/intyg/signed/' + intygId + '/revoke';
+        function _revokeSigneratIntyg(intygsId, intygsTyp, onSuccess, onError) {
+            $log.debug('_revokeSigneratIntyg: ' + intygsId + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/intyg/' + intygsTyp + '/' + intygsId + '/aterkalla';
             $http.post(restPath, {}).
                 success(function(data) {
                     if (data === '"OK"') {
@@ -155,10 +155,10 @@ angular.module('common').factory('common.CertificateService',
                 });
         }
 
-        function _logPrint(intygId, onSuccess, onError) {
-            $log.debug('_logPrint, intygId: ' + intygId);
-            var restPath = '/moduleapi/intyg/draft/logprint';
-            $http.post(restPath, intygId).
+        function _logPrint(intygsId, intygsTyp, onSuccess, onError) {
+            $log.debug('_logPrint, intygsId: ' + intygsId + ' intygsTyp: ' + intygsTyp);
+            var restPath = '/moduleapi/utkast/' + intygsTyp + '/' + intygsId + '/loggautskrift';
+            $http.post(restPath, intygsId).
                 success(function(data) {
                     onSuccess(data);
                 }).

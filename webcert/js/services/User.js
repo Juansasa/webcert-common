@@ -8,6 +8,14 @@ angular.module('common').factory('common.User',
                 this.userContext = null;
             },
 
+            getActiveFeatures: function() {
+                if (this.userContext) {
+                    return this.userContext.aktivaFunktioner;
+                } else {
+                    return null;
+                }
+            },
+
             /**
              * Set user context from api
              * @param userContext
@@ -96,7 +104,7 @@ angular.module('common').factory('common.User',
                 var payload = vardenhet;
 
                 var self = this;
-                var restPath = '/api/user/changeunit';
+                var restPath = '/api/anvandare/andraenhet';
                 $http.post(restPath, payload).success(function(data) {
                     $log.debug('got callback data: ' + data);
 

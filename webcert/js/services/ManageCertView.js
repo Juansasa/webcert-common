@@ -13,9 +13,9 @@ angular.module('common').factory('common.ManageCertView',
              * @param $scope
              * @private
              */
-            function _load($scope, onSuccess) {
+            function _load($scope, intygsTyp, onSuccess) {
                 $scope.widgetState.doneLoading = false;
-                CertificateService.getDraft($routeParams.certificateId, function(data) {
+                CertificateService.getDraft($routeParams.certificateId, intygsTyp, function(data) {
                     $scope.widgetState.doneLoading = true;
                     $scope.widgetState.activeErrorMessageKey = null;
                     $scope.cert = data.content;
@@ -35,8 +35,8 @@ angular.module('common').factory('common.ManageCertView',
              * @param $scope
              * @private
              */
-            function _save($scope) {
-                CertificateService.saveDraft($routeParams.certificateId, $scope.cert,
+            function _save($scope, intygsTyp) {
+                CertificateService.saveDraft($routeParams.certificateId, intygsTyp, $scope.cert,
                     function(data) {
 
                         $scope.certForm.$setPristine();
@@ -75,7 +75,7 @@ angular.module('common').factory('common.ManageCertView',
             /**
              * Discard a certificate draft
              */
-            function _discard($scope) {
+            function _discard($scope, intygsTyp) {
 
                 var bodyText = 'När du raderar utkastet tas det bort från Webcert.';
                 $scope.dialog = {
@@ -94,7 +94,7 @@ angular.module('common').factory('common.ManageCertView',
                     button1click: function() {
                         $log.debug('delete draft ');
                         $scope.dialog.acceptprogressdone = false;
-                        CertificateService.discardDraft($routeParams.certificateId, function() {
+                        CertificateService.discardDraft($routeParams.certificateId, intygsTyp, function() {
                             $scope.dialog.acceptprogressdone = true;
                             statService.refreshStat(); // Update statistics to reflect change
                             $location.path('/unsigned');
@@ -139,7 +139,7 @@ angular.module('common').factory('common.ManageCertView',
                 }
             }
 
-            function _signeraServer($scope, intygsTyp, intygId) {
+            function _signeraServer($scope, intygsTyp, intygsId) {
                 var bodyText = 'Är du säker på att du vill signera intyget?';
                 var confirmDialog = dialogService.showDialog($scope, {
                     dialogId: 'confirm-sign',
@@ -149,7 +149,7 @@ angular.module('common').factory('common.ManageCertView',
                     button1id: 'confirm-signera-utkast-button',
 
                     button1click: function() {
-                        _confirmSignera($scope, intygsTyp, intygId, confirmDialog);
+                        _confirmSignera($scope, intygsTyp, intygsId, confirmDialog);
                     },
                     button1text: 'common.sign',
                     button2click: function() {
@@ -162,15 +162,15 @@ angular.module('common').factory('common.ManageCertView',
                 });
             }
 
-            function _signeraKlient($scope, intygsTyp, intygId) {
-                CertificateService.getSigneringshash(intygId, function(ticket) {
+            function _signeraKlient($scope, intygsTyp, intygsId) {
+                CertificateService.getSigneringshash(intygsId, intygsTyp, function(ticket) {
                     _openNetIdPlugin(ticket.hash, function(signatur) {
-                        CertificateService.signeraUtkastWithSignatur(ticket.id, signatur, function(ticket) {
+                        CertificateService.signeraUtkastWithSignatur(ticket.id, intygsTyp, signatur, function(ticket) {
 
                             if (ticket.status === 'SIGNERAD') {
-                                _showIntygAfterSignering(intygsTyp, intygId);
+                                _showIntygAfterSignering(intygsTyp, intygsId);
                             } else {
-                                _waitForSigneringsstatusSigneradAndClose($scope, intygsTyp, intygId, ticket);
+                                _waitForSigneringsstatusSigneradAndClose($scope, intygsTyp, intygsId, ticket);
                             }
 
                         }, function(error) {
@@ -184,11 +184,11 @@ angular.module('common').factory('common.ManageCertView',
                 });
             }
 
-            function _confirmSignera($scope, intygsTyp, intygId, confirmDialog) {
+            function _confirmSignera($scope, intygsTyp, intygsId, confirmDialog) {
                 $scope.dialog.acceptprogressdone = false;
                 $scope.dialog.showerror = false;
-                CertificateService.signeraUtkast(intygId, function(ticket) {
-                    _waitForSigneringsstatusSigneradAndClose($scope, intygsTyp, intygId, ticket,
+                CertificateService.signeraUtkast(intygsId, intygsTyp, function(ticket) {
+                    _waitForSigneringsstatusSigneradAndClose($scope, intygsTyp, intygsId, ticket,
                         confirmDialog);
                 }, function(error) {
                     _showSigneringsError($scope, error);
@@ -208,14 +208,14 @@ angular.module('common').factory('common.ManageCertView',
                 }
             }
 
-            function _waitForSigneringsstatusSigneradAndClose($scope, intygsTyp, intygId, ticket, dialog) {
+            function _waitForSigneringsstatusSigneradAndClose($scope, intygsTyp, intygsId, ticket, dialog) {
 
                 function getSigneringsstatus() {
-                    CertificateService.getSigneringsstatus(ticket.id, function(ticket) {
+                    CertificateService.getSigneringsstatus(ticket.id, intygsTyp, function(ticket) {
                         if ('BEARBETAR' === ticket.status) {
                             $scope._timer = $timeout(getSigneringsstatus, 1000);
                         } else if ('SIGNERAD' === ticket.status) {
-                            _showIntygAfterSignering(intygsTyp, intygId, dialog);
+                            _showIntygAfterSignering(intygsTyp, intygsId, dialog);
                         } else {
                             _showSigneringsError($scope, { errorCode: 'SIGN_ERROR' });
                         }
@@ -225,11 +225,11 @@ angular.module('common').factory('common.ManageCertView',
                 getSigneringsstatus();
             }
 
-            function _showIntygAfterSignering(intygsTyp, intygId, dialog) {
+            function _showIntygAfterSignering(intygsTyp, intygsId, dialog) {
                 if (dialog) {
                     dialog.close();
                 }
-                $location.path('/intyg/' + intygsTyp + '/' + intygId);
+                $location.path('/intyg/' + intygsTyp + '/' + intygsId);
                 statService.refreshStat();
             }
 
@@ -275,9 +275,9 @@ angular.module('common').factory('common.ManageCertView',
                 return false;
             }
 
-            function _printDraft(intygId) {
+            function _printDraft(intygsId, intygsTyp) {
                 $window.print();
-                CertificateService.logPrint(intygId, function(data) {
+                CertificateService.logPrint(intygsId, intygsTyp, function(data) {
                         $log.debug('_logPrint, success: ' + data);
                     });
             }

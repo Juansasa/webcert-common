@@ -1,6 +1,6 @@
 angular.module('common').directive('wcHeader',
-    [ '$cookieStore', '$location', '$modal', '$window', 'common.messageService', 'common.statService', 'common.User',
-        function($cookieStore, $location, $modal, $window, messageService, statService, User) {
+    [ '$cookieStore', '$location', '$modal', '$window', 'common.featureService', 'common.messageService', 'common.statService', 'common.User',
+        function($cookieStore, $location, $modal, $window, featureService, messageService, statService, User) {
             'use strict';
 
             return {
@@ -27,8 +27,10 @@ angular.module('common').directive('wcHeader',
                         $scope.stat = message;
                     });
 
-                    $scope.menuDefs = [
-                        {
+                    $scope.menuDefs = [];
+
+                    if (featureService.isFeatureActive(featureService.features.HANTERA_FRAGOR)) {
+                        $scope.menuDefs.push({
                             link: '/web/dashboard#/unhandled-qa',
                             label: 'Frågor och svar',
                             requiresDoctor: false,
@@ -39,8 +41,11 @@ angular.module('common').directive('wcHeader',
                                     ' ej hanterade frågor och svar.';
                                 return $scope.stat.fragaSvarValdEnhet || '';
                             }
-                        },
-                        {
+                        });
+                    }
+
+                    if (featureService.isFeatureActive(featureService.features.HANTERA_INTYGSUTKAST)) {
+                        $scope.menuDefs.push({
                             link: '/web/dashboard#/unsigned',
                             label: messageService.getProperty('dashboard.unsigned.title'),
                             requiresDoctor: false,
@@ -51,31 +56,34 @@ angular.module('common').directive('wcHeader',
                                     'Vårdenheten har ' + $scope.stat.intygValdEnhet + ' ej signerade utkast.';
                                 return $scope.stat.intygValdEnhet || '';
                             }
-                        },
-                        {
-                            link: '/web/dashboard#/webcert/about',
-                            label: 'Om Webcert',
+                        });
+                    }
+
+                    if (featureService.isFeatureActive(featureService.features.HANTERA_INTYGSUTKAST)) {
+                        var writeCertMenuDef = {
+                            link: '/web/dashboard#/create/index',
+                            label: 'Sök/skriv intyg',
                             requiresDoctor: false,
                             getStat: function() {
                                 return '';
                             }
-                        }
-                    ];
+                        };
 
-                    var writeCertMenuDef = {
-                        link: '/web/dashboard#/create/index',
-                        label: 'Sök/skriv intyg',
+                        if (User.userContext.lakare) {
+                            $scope.menuDefs.splice(0, 0, writeCertMenuDef);
+                        } else {
+                            $scope.menuDefs.push(writeCertMenuDef);
+                        }
+                    }
+
+                    $scope.menuDefs.push({
+                        link: '/web/dashboard#/webcert/about',
+                        label: 'Om Webcert',
                         requiresDoctor: false,
                         getStat: function() {
                             return '';
                         }
-                    };
-
-                    if (User.userContext.lakare) {
-                        $scope.menuDefs.splice(0, 0, writeCertMenuDef);
-                    } else {
-                        $scope.menuDefs.splice(2, 0, writeCertMenuDef);
-                    }
+                    });
 
                     $scope.isActive = function(page) {
                         if (!page) {

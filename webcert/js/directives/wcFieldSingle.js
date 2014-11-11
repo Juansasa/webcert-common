@@ -14,7 +14,7 @@ angular.module('common').directive('wcFieldSingle',
             },
             template: '<div class="body-row body-row-single clearfix">' +
                 '<h4 class="cert-field-number" ng-if="fieldNumber != undefined">' +
-                '<span message key="modules.label.field"></span> {{fieldNumber}}</h4>' +
+                '<span message key="modules.label.field"></span>&nbsp;{{fieldNumber}}</h4>' + // nbsp is needed for ie8 to space falt and number
                 '<span ng-transclude></span>' +
                 '</div>'
         };
